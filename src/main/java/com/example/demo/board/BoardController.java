@@ -28,7 +28,7 @@ public class BoardController {
 	private RepService repService;
 	
 	public static String basePath = "C:\\shopimg\\";
-	/*게시물 리스트 뽑기
+	/*
 	 * author : 문효정
 	 */
 	@RequestMapping("/board/list")
