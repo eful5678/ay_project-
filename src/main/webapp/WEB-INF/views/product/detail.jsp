@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="EUC-KR"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
-// ¼öÁ¤ »èÁ¦ÀÇ °æ¿ì admin ÆäÀÌÁö¿¡¼­ ³Ñ¾î°¡µµ·Ï.
+// ìˆ˜ì • ì‚­ì œì˜ ê²½ìš° admin í˜ì´ì§€ì—ì„œ ë„˜ì–´ê°€ë„ë¡.
 $(document).ready(function() {
 	$(".img").mouseover(function() {
 		$("#bigImg").attr('src', this.src);
@@ -19,8 +21,8 @@ $(document).ready(function() {
 		alert(m_id + " + " + p_num + " + " + cost);
 		$.post("/cart/addCart", { m_id: m_id, p_num: p_num, cost: cost })
 		.done(function(data) {
-			// Áßº¹ ºÒ°¡´ÉÇÏ°Ô ÇÏ´Â°Ç ´ÙÀ½¹ø¿¡ ÀâÀÚ.
-			alert("Àå¹Ù±¸´Ï¿¡ Ãß°¡µÇ¾ú½À´Ï´Ù!");
+			// ì¤‘ë³µ ë¶ˆê°€ëŠ¥í•˜ê²Œ í•˜ëŠ”ê±´ ë‹¤ìŒë²ˆì— ì¡ì.
+			alert("ì¥ë°”êµ¬ë‹ˆì— ì¶”ê°€ë˜ì—ˆìŠµë‹ˆë‹¤!");
 		});
 	});
 	
@@ -28,22 +30,30 @@ $(document).ready(function() {
 </script>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+   $(document).ready(function() {
+      $(".img").mouseover(function() {
+         $("#bigImg").attr('src', this.src);
+      });
+   });
+</script>
 </head>
 <body>
 
-<h5>¼¼¼Ç id : ${ sessionScope.id }</h5>
-<h3>»óÇ° »ó¼¼ Á¤º¸</h3>
+<h5>ì„¸ì…˜ id : ${ sessionScope.id }</h5>
+<h3>ìƒí’ˆ ìƒì„¸ ì •ë³´</h3>
 <form action="${ pageContext.request.contextPath }/order/orderForm" method="post">
 <table border="1" cellspacing="0">
 <tr>
-<th>¹øÈ£</th>
+<th>ë²ˆí˜¸</th>
 <td><input type="text" name="p_num" id="p_num" value="${p.num }" readonly="readonly">
 </td>
 </tr>
 <tr>
-	<th>»óÇ°ÀÌ¹ÌÁö</th>
+	<th>ìƒí’ˆì´ë¯¸ì§€</th>
 	<td><c:if test="${empty file0 }">
-					µî·ÏµÈ ÀÌ¹ÌÁö°¡ ¾ø½À´Ï´Ù.
+					ë“±ë¡ëœ ì´ë¯¸ì§€ê°€ ì—†ìŠµë‹ˆë‹¤.
 					</c:if> 
 					<c:if test="${not empty file0 }">
 					<table>
@@ -61,42 +71,63 @@ $(document).ready(function() {
 <tr>
 
 <tr>
-<th>»óÇ°¸í</th>
+<th>ìƒí’ˆëª…</th>
 <td><input type="text" value="${p.name }" readonly="readonly">
 </td>
 </tr>
 
 <tr>
-<th>¸ŞÀÌÄ¿</th>
+         <th>ì´ë¯¸ì§€</th>
+         <td><c:if test="${empty file0 }">
+               ë“±ë¡ëœ ì´ë¯¸ì§€ê°€ ì—†ìŠµë‹ˆë‹¤.
+               </c:if> 
+               <c:if test="${not empty file0 }">
+               <table>
+                  <tr>
+                     <td colspan="3">
+                     <img id="bigImg" src="${pageContext.request.contextPath }/img?fname=${file0 }&num=${p.num }" 
+                     style="width:150px;height:150px"></td>
+                  </tr>
+                  <tr>
+                     <td><img src="${pageContext.request.contextPath }/img?fname=${file0 }&num=${p.num }" class="img" width="50" height="50"></td>
+                     <td><img src="${pageContext.request.contextPath }/img?fname=${file1 }&num=${p.num }" class="img" width="50" height="50"></td>
+                     <td><img src="${pageContext.request.contextPath }/img?fname=${file2 }&num=${p.num }" class="img" width="50" height="50"></td>
+               </table>
+            </c:if></td>
+      </tr>
+      
+
+<tr>
+<th>ë©”ì´ì»¤</th>
 <td><input type="text" value="${p.maker }" readonly="readonly">
 </td>
 </tr>
 
 <tr>
-<th>°¡°İ</th>
+<th>ê°€ê²©</th>
 <td><input type="text" id="cost" value="${p.price }" readonly="readonly">
 </td>
 </tr>
 
 <tr>
-<th>¿ø»êÁö</th>
+<th>ì›ì‚°ì§€</th>
 <td><input type="text" value="${p.origin }" readonly="readonly">
 </td>
 </tr>
 
 <tr>
-<th>Àç·á</th>
+<th>ì¬ë£Œ</th>
 <td><input type="text" value="${p.material }" readonly="readonly">
 </td>
 </tr>
 
 <tr>
-<th>³²´Â¼ö·®</th>
+<th>ë‚¨ëŠ”ìˆ˜ëŸ‰</th>
 <td><input type="text" value="${p.quantity }" readonly="readonly"></td>
 </tr>
 
 <tr>
-<th>ÁÖ¹®¼ö·®</th>
+<th>ì£¼ë¬¸ìˆ˜ëŸ‰</th>
 <td><input type="text" name="quantity"></td>
 </tr>
 
@@ -104,12 +135,13 @@ $(document).ready(function() {
 
 <tr>
 <td colspan="2">
-	<input type="hidden" name="m_id" id="m_id" value="${ sessionScope.id }"><input type="submit" value="±¸¸Å">
-	<input type="button" value="Àå¹Ù±¸´Ï·Î" id="cart">
+	<input type="hidden" name="m_id" id="m_id" value="${ sessionScope.id }"><input type="submit" value="êµ¬ë§¤">
+	<input type="button" value="ì¥ë°”êµ¬ë‹ˆë¡œ" id="cart">
 </td>
 </tr>
 </table>
 
-</form>
+<a href="${pageContext.request.contextPath }/review/reviewForm">ë¦¬ë·° ì‘ì„±</a>
+
 </body>
 </html>
