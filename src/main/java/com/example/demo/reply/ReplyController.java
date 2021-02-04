@@ -1,5 +1,6 @@
 package com.example.demo.reply;
 
+
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ public class ReplyController {
 		return "redirect:/rep/list?board_num="+r.getBoard_num();
 	}
 	
+
 	@RequestMapping(value="/rep/list")
 	public ModelAndView list(@RequestParam(value="board_num")int board_num){
 		System.out.println("ReplyController.list()");
@@ -29,4 +31,3 @@ public class ReplyController {
 		mav.addObject("list", list);
 		return mav;
 	}
-}
