@@ -58,8 +58,7 @@
 <input type="button" value="삭제" id="del">
 </td>
 </tr>
-
 </table>
-
+<a href="${pageContext.request.contextPath }/review/reviewForm">리뷰작성</a>
 </body>
 </html>
