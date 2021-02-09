@@ -25,6 +25,16 @@ public class OrderService {
 		// TODO Auto-generated method stub
 		return mapper.getAllOrderList();
 	}
+
+	public void changeState(int num, int state) {
+		// TODO Auto-generated method stub
+		mapper.updateState(num, state);
+	}
+
+	public int getNum() {
+		// TODO Auto-generated method stub
+		return mapper.getNum();
+	}
 	
 	
 }

@@ -100,6 +100,15 @@ public class Member {
 				+ gender + "," + address + "," + tel + "," + email;
 	}
 
+	// 로그를 위한 세팅
+	public String category() {
+		return "id,password,name,birth,gender,address,tel,email,methodName\n";
+	}
 	
+	// 로그를 위한 세팅
+	public String content() {
+		return id + "," + password + "," + name + "," + birth 
+				+ "," + gender + "," + address + "," + tel + "," + email;
+	}
 	
 }

@@ -152,7 +152,16 @@ public class Board {
 				+ ", file3=" + file3 + "]";
 	}
 
+
+	public String category() {
+		return "num,pwd,writer,title,content,b_date,path,reqs,file1,file2,file3,methodName\n";
+	}
 	
+	public String content() {
+		return num + "," + pwd + "," + writer + "," + title 
+				+ "," + content + "," + b_date + "," + path + "," + "reps" + "," 
+				+ file1.getName() + "," + file2.getName() + "," +  file3.getName();
+	}
 	
 	
 	

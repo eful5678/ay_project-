@@ -12,5 +12,9 @@ public interface OrderMapper {
 	void insertOrder(Order o);
 
 	ArrayList<Order> getAllOrderList();
+
+	void updateState(int num, int state);
+
+	int getNum();
 	
 }

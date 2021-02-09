@@ -60,6 +60,24 @@ public class AdminController {
 		return "admin/adminLoginForm";
 	}
 	
+	@RequestMapping("/admin/admin")
+	public ModelAndView admin(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView("admin/admin");
+		String id = "";
+		HttpSession session = req.getSession(false);
+		// TODO 공통 함수로 리팩토링 필요
+		if (session == null) {
+			System.out.println("session null");
+			mav.setViewName("admin/adminLoginForm");
+		} else {
+			id = (String) session.getAttribute("id");
+		}
+		if (id.isBlank()) {
+			mav.setViewName("admin/adminLoginForm");
+		}
+		return mav;
+	}
+	
 	@RequestMapping("/admin/login")
 	public String login(Admin ad, HttpServletRequest req) {
 		Admin admin = adminService.getAdmin(ad.getId());
@@ -89,8 +107,23 @@ public class AdminController {
 		if (id.isBlank()) {
 			mav.setViewName("admin/adminLoginForm");
 		}
+		
 		System.out.println("id = " + id +", mav = " + mav.getViewName());
+		
 		ArrayList<Order> list = orderService.getAllOrderList();
+		for (int i = 0; i < list.size(); i++) {
+	         String path = basePath + list.get(i).getP_num() + "\\";
+	         File imgDir = new File(path);   
+	        
+	         String[] files = imgDir.list();
+	         if(imgDir.exists()) {
+	            for(int j = 0; j < files.length; j++) {
+	               mav.addObject("file" + j, files[j]);
+	            }
+	            list.get(i).setImgPath(files[0]);
+	        }
+	     }
+		
 		mav.addObject("list", list);
 		return mav;
 		
@@ -272,5 +305,11 @@ public class AdminController {
 		}
 		mav.addObject("b", b);
 		return mav;
+	}
+	
+	@RequestMapping("admin/changeState")
+	public void changeState(@RequestParam("num") int num, @RequestParam("state") int state) {
+		System.out.println(num + "," +state);
+		orderService.changeState(num, state); 
 	}
 }

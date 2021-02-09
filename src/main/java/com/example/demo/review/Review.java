@@ -59,11 +59,18 @@ public class Review {
 	public void setPdate(Date pdate) {
 		this.pdate = pdate;
 	}
+	
 	@Override
 	public String toString() {
-		return "Review\n" + "num, pnum, title, writer, content, pdate\n" 
-				+ num + "," + pnum + "," + title + "," + writer + "," + content + "," + pdate;
+		return "Review [num=" + num + ", pnum=" + pnum + ", title=" + title + ", writer=" + writer + ", content="
+				+ content + ", pdate=" + pdate + "]";
 	}
-	   
-	   
+	
+	public String category() {
+		return "num,pnum,title,writer,content,pdate,methodName\n";
+	}
+	
+	public String content() {
+		return num + "," + pnum + "," + title + "," + writer + "," + content + "," + pdate;
+	}   
 }
