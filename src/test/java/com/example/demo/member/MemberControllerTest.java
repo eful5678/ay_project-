@@ -1,37 +1,34 @@
-package com.example.demo;
+package com.example.demo.member;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import org.mybatis.spring.boot.test.autoconfigure.AutoConfigureMybatis;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.member.Member;
 import com.example.demo.member.MemberController;
-import com.example.demo.member.MemberMapper;
 import com.example.demo.member.MemberService;
 
-import net.bytebuddy.agent.VirtualMachine.ForHotSpot.Connection.Response;
 
 // MVC를 위한 테스트
 @WebMvcTest(controllers = MemberController.class)
 @AutoConfigureMockMvc
+@AutoConfigureMybatis
 public class MemberControllerTest {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -41,9 +38,6 @@ public class MemberControllerTest {
 	
 	@MockBean
 	private MemberService service;
-	
-	@MockBean
-	private MemberMapper mapper;
 	
 	@Test
 	@DisplayName("Member Root")
@@ -101,6 +95,7 @@ public class MemberControllerTest {
 		m.setId("failed");
 		m.setPassword("failed");
 		
+		when(service.getMember(m.getId())).thenReturn(null);
 		mockMvc.perform(post("/member/login?id={id}&password={password}", m.getId(), m.getPassword()))
 				.andExpect(status().isOk())
 				.andExpect(view().name("member/loginForm"))
@@ -120,6 +115,7 @@ public class MemberControllerTest {
 //		assertThat(member.getId()).isEqualTo("a");
 //		assertThat(member.getPassword()).isEqualTo("a");
 		
+		when(service.getMember(m.getId())).thenReturn(new Member("a", "a"));
 		mockMvc.perform(get("/member/login").param("id", m.getId()).param("password", m.getPassword()))
 		.andExpect(status().isOk())
 		.andExpect(view().name("member/main"))

@@ -87,7 +87,6 @@ public class MemberController {
 	@RequestMapping("/member/login")
 	public String login(Member m, HttpServletRequest req) {
 		//loginForm에서 입력받은 값을 m에 담고 해당하는 아이디에 대한 db 값을 m2에 담는다 
-		System.out.println(m.toString());
 		Member m2 = service.getMember(m.getId());
 		// DB로부터 받아온 값이 없고, 받아온 비밀번호가 입력한 비밀번호값과 일치하지않으면 로그인 실패 -> loginForm으로 되돌린다.
 		if (m2 == null || !m2.getPassword().equals(m.getPassword())) {
@@ -97,7 +96,7 @@ public class MemberController {
 			HttpSession session = req.getSession();
 			session.setAttribute("id", m2.getId());
 			log.info(m2.getId()+",login,");
-			return "/member/main";
+			return "member/main";
 		}
 	}
 	

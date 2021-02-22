@@ -17,6 +17,14 @@ public class Member {
 	public Member() {
 		super();
 	}
+	
+
+	public Member(String id, String password) {
+		super();
+		this.id = id;
+		this.password = password;
+	}
+
 
 	public Member(String id, String password, String name, Date birth, String gender, String postalCode,
 			String roadAddress, String address, String tel, String email) {
