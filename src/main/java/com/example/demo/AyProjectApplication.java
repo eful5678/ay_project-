@@ -7,7 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AyProjectApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AyProjectApplication.class, args);
+		SpringApplication application = new SpringApplication(AyProjectApplication.class);
+		application.run(args);
+//		SpringApplication.run(AyProjectApplication.class, args);
 	}
 
 }
