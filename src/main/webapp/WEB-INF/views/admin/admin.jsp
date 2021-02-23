@@ -21,9 +21,9 @@
 	var sel2=0; //선택한 것 저장할 변수 소분류
 	$(document).ready(
 			function() {
-				$.post("/category/getsub", {
+				$.post("/category/getCategory", {
 					type : 1,// 대분류 번호 
-					p_id : 0 // 
+					c_id : 0 // 
 				}).done(
 						function(data) {
 							var c = eval("(" + data + ")");
@@ -38,9 +38,9 @@
 					var x = 0;
 					x = this.options[this.options.selectedIndex].value
 					sel1 = x;
-					$.post("/category/getsub", {
+					$.post("/category/getCategory", {
 						type : 2,
-						p_id : x // 전단계 대분류 
+						c_id : x // 전단계 대분류 
 					}).done(function(data) {
 						var c = eval("(" + data + ")");
 						$("#s2").empty();//초기화를 하려면 비우고 
@@ -55,7 +55,7 @@
 
 				$("input[type=button]").click(function() {		
 					if(this.form.elements[0].name=='s2'){//중뷴류 버튼을 눌렀을 때 sel1의 값을 
-						this.form.p_id.value=sel1;
+						this.form.c_id.value=sel1;
 					}
 					var o = this.form.elements[0].options;
 					for(i=0;i<o.length;i++){						
@@ -121,7 +121,7 @@
 		<select id="s2"  name="s2"></select> 
 		<input type="text" id="n2" name="name">
 		<input type="hidden" name="type" value="2">
-		<input type="hidden" id="h1" name="p_id" value="">
+		<input type="hidden" id="h1" name="c_id" value="">
 		<input type="button" id="b2" value="추가">
 	</form>
 <hr>

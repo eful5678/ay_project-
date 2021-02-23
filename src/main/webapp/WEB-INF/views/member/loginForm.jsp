@@ -46,6 +46,7 @@ function go() {
     width: 50%;
     margin: 0px auto;
     float: none;
+    
 }
 
 .vertical-center {
@@ -100,8 +101,8 @@ function go() {
     </div>
   </nav>
 </header>
-<div class="container-fluid vertical-center d-flex justify-content-center">
-<form name="f" method="POST" action="${pageContext.request.contextPath }/member/login">
+<div class="container-fluid vertical-center d-flex justify-content-center" >
+<form name="f" method="POST" action="${pageContext.request.contextPath }/member/login" >
 	<table class="table table-hover text-centered table-bordered" border="1">
 		<thead class="table-dark">
 			<tr>
