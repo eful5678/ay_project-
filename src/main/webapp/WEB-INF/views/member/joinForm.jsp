@@ -19,67 +19,70 @@
 			});
 		});
 		$("#join").click(function() {
-			if ($("#idResult").text().trim() == "사용가능") {
+			
+			if ($("#id").val()==""){
+				alert("아이디가 액션빔");
+				return
+			} if ($("#password").val()==""){
+				alert("비밀번호가 액션빔");
+				return
+			} if ($("#name").val()==""){
+				alert("이름이 액션빔");
+				return
+			} if ($("#birth").val()==""){
+				alert("생일이 액션빔");
+				return
+			} if ($("#gender").val()==""){
+				alert("성별이 액션빔");
+				return
+			} if ($("#address").val()==""){
+				alert("주소가 액션빔");
+				return
+			} if ($("#tel").val()==""){
+				alert("전화번호가 액션빔");
+				return
+			} if ($("#email").val()==""){
+				alert("이메일이 액션빔");
+				return
+			} if ($("#idResult").text().trim() == "사용가능") {
 				$("form").submit();
 			} else {
-				alert("id 중복체크 하셩");
+				alert("id 중복체크 하세여");
 			}
 		});
 	});
 </script>
 <script>
-	function go() {
-		var id = document.getElementById("id");
-		var password = document.getElementById("password");
-		var name = document.getElementById("name");
-		var birth = document.getElementById("birth");
-		var gender = document.getElementById("gender");
-		var address = document.getElementById("address");
-		var tel = document.getElementById("tel");
-		var email = document.getElementById("email");
-		if (id.value == "") {
-			alert("아이디 액션빔")
-			return 
-
-		}
-		if (password.value == "") {
-			alert("비밀번호 액션빔")
-			return 
-
-		}
-		if (name.value == "") {
-			alert("이름 액션빔")
-			return 
-
-		}
-		if (birth.value == "") {
-			alert("생년월일 액션빔")
-			return 
-
-		}
-		if (gender.value == "") {
-			alert("성별 액션빔")
-			return 
-
-		}
-		if (address.value == "") {
-			alert("주소 액션빔")
-			return 
-
-		}
-		if (tel.value == "") {
-			alert("전화번호 액션빔")
-			return 
-
-		}
-		if (email.value == "") {
-			alert("이메일 액션빔")
-			return 
-
-		} else {
-			f.submit()
-		}
-	}
+$(document).ready(function(){
+  $('#showPassword').on('click', function(){
+    var passwordField = $('#password1');
+    var passwordFieldType = passwordField.attr('type');
+    if(passwordFieldType == 'password')
+    {
+    	passwordField.attr('type', 'text');
+    	$(this).val('Hide');
+    } else {
+    	passwordField.attr('type', 'password');
+    	$(this).val('Show');
+    }
+  });
+});
+</script>
+<script>
+$(document).ready(function(){
+	  $('#showPassword1').on('click', function(){
+	    var passwordField = $('#password2');
+	    var passwordFieldType = passwordField.attr('type');
+	    if(passwordFieldType == 'password')
+	    {
+	    	passwordField.attr('type', 'text');
+	    	$(this).val('Hide');
+	    } else {
+	    	passwordField.attr('type', 'password');
+	    	$(this).val('Show');
+	    }
+	  });
+	});
 </script>
  <!-- Required meta tags -->
  <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -176,7 +179,14 @@
 			</tr>
 			<tr>
 				<th>PWD</th>
-				<td><input type="password" name="password" id="password"></td>
+				<td><input type="password" name="password" id="password1"></td>
+				<td><input type="button" value="show" id="showPassword"></td>
+			</tr>
+			<tr>
+				<th>PWDCHK</th>
+				<td><input type="password" name="password" id="password2" onchange="checkpwd()"
+				placeholder="비밀번호를 쓰세여">
+				<input type="button" value="show" id="showPassword1"></td>
 			</tr>
 			<tr>
 				<th>Name</th>
