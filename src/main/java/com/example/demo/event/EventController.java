@@ -23,14 +23,22 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.category.Category;
 
+/**
+ * 
+ * @author kpk
+ * @since 2021-02-22
+ * 이벤트 관련 기능을 처리하는 컨트롤러
+ */
 @Controller
 public class EventController {
 
 	@Autowired
 	private EventService service;
 
+	// 이미지 파일이 저장될 위치
 	public static String basePath = "C:\\shopimg\\e";
 
+	// 
 	@RequestMapping("/event/list")
 	public ModelAndView List() {
 		// list에 service.getProductAll()을 담는다
@@ -61,6 +69,7 @@ public class EventController {
 			}
 		}
 
+		// jsp가 배열의 길이만큼 for문을 돌릴 수 있도록 lengths List를 전송해줌.
 		ArrayList<Integer> lengths = new ArrayList<Integer>();
 		for (int i = 0; i < list.size(); i++) {
 			lengths.add(i);
