@@ -22,7 +22,7 @@ public class CategoryController {
 	 * 카테고리 Data JSON으로 받기용
 	 * @param type 분류
 	 * @param c_id 카테고리 ID
-	 * @return
+	 * @return viewName
 	 */
 	@RequestMapping(value = "/category/getCategory")
 	public ModelAndView getCategory(@RequestParam(value = "type") int type, @RequestParam(value = "c_id") int c_id) {
@@ -43,17 +43,39 @@ public class CategoryController {
 
 	/**
 	 * 카테고리 추가.
-	 * @param c
-	 * @param type
-	 * @return
+	 * @param c : 추가 내용
+	 * @param type : 카테고리1인가 2인가 구별
+	 * @return viewName
 	 */
 	@RequestMapping(value = "/category/addCategory")  // 카테고리 추가 
 	public String addCategory(Category c, @RequestParam(value = "type") int type) {
+		System.out.println("TARGET : "+type+","+c.toString());
+	
 		service.addCategory(c, type);
-		return "admin/admin";
+		return "redirect:/admin/admin";
 	}
 
-	// TODO 카테고리 수정
+	/**
+	 * 카테고리 수정
+	 * @param type : 카테고리1인가 2인가 구별
+	 * @param c : 수정 내용
+	 * @return viewName
+	 */
+	@RequestMapping("/category/editCategory")
+	public String editCategory(@RequestParam(value = "type") int type, Category c) {
+		service.editCategory(type, c);
+		return "redirect:/admin/admin";
+	}
 	
-	// TODO 카테고리 삭제
+	/**
+	 * 카테고리 삭제
+	 * @param type : 카테고리1인가 2인가 구별
+	 * @param id : 삭제한 카테고리의 id
+	 * @return viewName
+	 */
+	@RequestMapping("/category/deleteCategory")
+	public String deleteCategory(@RequestParam(value = "type") int type, @RequestParam(value = "id") int id) {
+		service.delCategory(id, type);
+		return "redirect:/admin/admin";
+	}
 }

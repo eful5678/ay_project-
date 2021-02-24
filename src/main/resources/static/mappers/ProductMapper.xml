@@ -51,7 +51,7 @@ select*from product
 </select>	
 	
 <update id="update" parameterType="com.example.demo.product.Product">
-update product set name=#{name}, maker=#{maker}, price=#{price}, origin=#{origin}, material=#{material}, quantity=#{quantity}, imgPath=#{imgPath}, category1=#{category1}, category2=#{category2},  event_num=#{event_num} where num=#{num}
+update product set name=#{name}, maker=#{maker}, price=#{price}, origin=#{origin}, material=#{material}, quantity=#{quantity}, imgPath=#{imgPath}, category1=#{category1}, category2=#{category2}, event_num=#{event_num} where num=#{num}
 </update>	
 
 <delete id="delete" parameterType="int">
@@ -66,5 +66,8 @@ select seq_product.nextval from dual
 select*from product where event_num != 0
 </select>	
 
+<update id="decreaseProduct" parameterType="com.example.demo.order.Order">
+update product set quantity=quantity-#{quantity} where num=#{p_num} 
+</update>
 
 </mapper>

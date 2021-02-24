@@ -31,10 +31,16 @@
    
    function check() {
 		var quantity = document.f.quantity;
+		var inventory = document.f.inventory;
 		if (quantity.value == "") {
 			alert("주문수량을 기재해주세요.");
 			quantity.value = "";
 			quantity.focus();
+			return false;
+		}
+		
+		if (quantity.value > inventory.value) {
+			alert("재고가 부족합니다.")
 			return false;
 		}
    }
@@ -46,75 +52,75 @@
 <form name="f" action="${ pageContext.request.contextPath }/order/orderForm" method="post" onsubmit="return check()">
 <table border="1" cellspacing="0">
 <tr>
-
-<th>번호</th>
-<td><input type="text" name="p_num" id="p_num" value="${p.num }" readonly></td>
+	<th>번호</th>
+	<td>
+		<input type="text" name="p_num" id="p_num" value="${p.num }" readonly>
+	</td>
 </tr>
 
 
 <tr>
-
-<th>상품명</th>
-<td><input type="text" name="name" value="${p.name }" readonly>
-
-</td>
+	<th>상품명</th>
+	<td>
+		<input type="text" name="name" value="${p.name }" readonly>
+	</td>
 </tr>
 
 <tr>
-         <th>이미지</th>
-         <td><c:if test="${empty file0 }">
-               등록된 이미지가 없습니다.
-               </c:if> 
-               <c:if test="${not empty file0 }">
-               <table>
-                  <tr>
-                     <td colspan="3">
-                     <img id="bigImg" src="${pageContext.request.contextPath }/img?fname=${file0 }&num=${p.num }" 
+    <th>이미지</th>
+    <td>
+    	<c:if test="${empty file0 }">
+         등록된 이미지가 없습니다.
+        </c:if> 
+        <c:if test="${not empty file0 }">
+           <table>
+              <tr>
+                 <td colspan="3">
+                 <img id="bigImg" src="${pageContext.request.contextPath }/img?fname=${file0 }&num=${p.num }" 
                      style="width:150px;height:150px"></td>
-                  </tr>
-                  <tr>
-                     <td><img src="${pageContext.request.contextPath }/img?fname=${file0 }&num=${p.num }" class="img" width="50" height="50"></td>
-                     <td><img src="${pageContext.request.contextPath }/img?fname=${file1 }&num=${p.num }" class="img" width="50" height="50"></td>
-                     <td><img src="${pageContext.request.contextPath }/img?fname=${file2 }&num=${p.num }" class="img" width="50" height="50"></td>
-               </table>
-            </c:if></td>
-      </tr>
+              </tr>
+              <tr>
+                 <td><img src="${pageContext.request.contextPath }/img?fname=${file0 }&num=${p.num }" class="img" width="50" height="50"></td>
+                 <td><img src="${pageContext.request.contextPath }/img?fname=${file1 }&num=${p.num }" class="img" width="50" height="50"></td>
+                 <td><img src="${pageContext.request.contextPath }/img?fname=${file2 }&num=${p.num }" class="img" width="50" height="50"></td>
+          </table>
+        </c:if>
+    </td>
+</tr>
 <tr>
-<th>메이커</th>
-<td><input type="text" name="maker" value="${p.maker }" readonly></td>
+	<th>메이커</th>
+	<td><input type="text" name="maker" value="${p.maker }" readonly></td>
+</tr>
+<tr>
+	<th>가격</th>
+	<td><input type="text" name="price" id="cost"  value="${p.price }" readonly></td>
+</tr>
+<tr>
+	<th>원산지</th>
+	<td><input type="text" name="origin" value="${p.origin }" readonly></td>
+</tr>
+<tr>
+	<th>재료</th>
+	<td><input type="text" name="material" value="${p.material }" readonly></td>
+</tr>
+<tr>
+	<th>남는수량</th>
+	<td>
+		<c:if test="${p.quantity == 0 }"><input type="text" value="품절되었습니다." name="inventory" readonly="readonly"></c:if>
+		<c:if test="${p.quantity != 0 }"><input type="text" value="${p.quantity }" name="inventory" readonly="readonly"></c:if>
+	</td>
+</tr>
+<tr>
+	<th>주문수량</th>
+	<td><input type="text" name="quantity"></td>
 </tr>
 
 <tr>
-<th>가격</th>
-<td><input type="text" name="price" id="cost"  value="${p.price }" readonly></td>
-</tr>
-
-<tr>
-<th>원산지</th>
-<td><input type="text" name="origin" value="${p.origin }" readonly></td>
-</tr>
-
-<tr>
-<th>재료</th>
-<td><input type="text" name="material" value="${p.material }" readonly></td>
-</tr>
-
-<tr>
-<th>남는수량</th>
-<td><input type="text" value="${p.quantity }" readonly="readonly"></td>
-</tr>
-
-<tr>
-<th>주문수량</th>
-<td><input type="text" name="quantity"></td>
-</tr>
-
-<tr>
-<td colspan="2">
-	<input type="hidden" name="m_id" id="m_id" value="${ sessionScope.id }">
-	<input type="submit" value="구매" >
-	<input type="button" value="장바구니로" id="cart">
-</td>
+	<td colspan="2">
+		<input type="hidden" name="m_id" id="m_id" value="${ sessionScope.id }">
+		<input type="submit" value="구매" >
+		<input type="button" value="장바구니로" id="cart">
+	</td>
 </tr>
 </table>
 </form>
