@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+#reviewTable{
+	width: 500px;
+}
+
+td{
+	color:blue;
+}
