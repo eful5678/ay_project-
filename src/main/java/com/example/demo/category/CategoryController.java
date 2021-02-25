@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * @author kpk
  * 카테고리 관련 기능을 처리하는 컨트롤러
+ * @author kpk
  */
 @Controller
 public class CategoryController {
