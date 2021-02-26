@@ -6,15 +6,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * 장바구니 기능들을 구현한 Controller 클래스
+ * @author 김평기
+ * @version main 1
+ */
 @Controller
 public class CartController {
 
 	@Autowired
 	private CartService service;
 	
+	/**
+	 * 장바구니 추가 기능
+	 * 상품 상세 페이지(/product/detail.jsp)에서 실행됨
+	 * @param req 세션
+	 */
 	@RequestMapping("/cart/addCart")
 	public void addCart(HttpServletRequest req) {
-		//  java.sql.SQLIntegrityConstraintViolationException: ORA-00001: unique constraint (HR.SYS_C007378) violated : 기본 키 두 개 생성 https://moonong.tistory.com/48 
 		String m_id = req.getParameter("m_id");
 		int p_num = Integer.parseInt(req.getParameter("p_num"));
 		int cost = Integer.parseInt(req.getParameter("cost"));

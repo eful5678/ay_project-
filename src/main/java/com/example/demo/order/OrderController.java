@@ -2,6 +2,7 @@ package com.example.demo.order;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.slf4j.Logger;
@@ -12,16 +13,14 @@ import com.example.demo.product.Product;
 import com.example.demo.product.ProductService;
 
 /**
- * 구매 창 띄우기, 구매 등의 기능을 제공하는 컨트롤러, 여기서 로그가 찍힌다.
+ * 구매 관련 기능을 제공하는 Controller 클래스
  * @author 김평기
- * @version 2021-02-09 
+ * @version main 1
  */
 @Controller
 public class OrderController {
 	
-	/**
-	 * 로그 찍는 용.
-	 */
+	// 로그
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
@@ -34,9 +33,9 @@ public class OrderController {
 	private MemberService memberService;
 	
 	/**
-	 * 구매 창 띄우기, 여기서 구매 창이 미리 받아두어야할 값들을 넘긴다.
+	 * 구매 페이지(/order/orderForm.jsp) 띄우기, 여기서 구매 창이 미리 받아두어야할 값들을 넘긴다.
 	 * @param o : 구매 관련 정보 
-	 * @return ModelAndView ( getObj : Order:o )
+	 * @return 이동할 Url 및 구매 페이지에서 필요한 정보들 
 	 */
 	@RequestMapping("/order/orderForm")
 	public ModelAndView orderForm(Order o) {
@@ -60,9 +59,9 @@ public class OrderController {
 	 * 구매하기, 주소와 전화번호를 입력하는 것으로 상품을 구매한다. 이때 로그가 남는다.
 	 * 로그 : order.num, member.gender, member.birth, order.address, order.tel, order.id, order.p_num, order.quantity, order.cost, log_date
 	 * @param o : 구매 관련 정보  
-	 * @return 메인으로 되돌아감.
+	 * @return 이동할 Url.
 	 */
-	@RequestMapping("/order/order")
+	@PostMapping("/order/order")
 	public String order(Order o) {
 		// 시퀀스로부터 구매번호 값 가져오기.
 		int num = orderService.getNum();
@@ -78,7 +77,7 @@ public class OrderController {
 		// 로그 남기기.
 		log.info(o.content());
 		// 리턴 메인
-		return "/member/main";
+		return "redirect:/member/main";
 	}
 	
 }

@@ -21,12 +21,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.board.Board;
 
+/**
+ * 상품과 관련된 기능들을 구현한 Controller 클래스입니다.
+ * @author 김평기
+ * @version main 1
+ */
 @Controller
 public class ProductController {
 
 
    @Autowired
    private ProductService service;
+   
    
    public static String basePath = "C:\\shopimg\\p";
    

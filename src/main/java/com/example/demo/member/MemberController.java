@@ -16,36 +16,49 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 
-
+/**
+ * 고객과 관련된 기능들을 구현한 Controller 클래스입니다.
+ * @author 김평기
+ * @version main 1
+ */
 @Controller
 public class MemberController {
 
-	/**
-	 * @author 김평기
-	 * 로그 찍는 용
-	 */
+	// 로그
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	private MemberService service;
 	
+	/**
+	 * 기본 url 입력시 메인 페이지(/member/main.jsp)로 이동하도록 url을 자동 리턴
+	 * @return Redirect할 Url 
+	 */
 	@RequestMapping("/")
-	public String root() throws Exception {
+	public String root() {
 		//main페이지를 첫화면으로 설정한다. 
 		return "redirect:/member/main";
 	}
 	
+	/**
+	 * 메인 페이지로 이동
+	 */
 	@RequestMapping("/member/main")
 	public void main() {
 		//main.jsp를 불러와 화면에 보여준다.
 	}
 	
 
+	/**
+	 * 회원가입 페이지(/member/joinForm.jsp)를 불러오고 동시에 아이디중복확인이 이루어질 수 있도록 세션에 idCheck:boolean=false를 추가.
+	 * @param req 세션
+	 */
 	@RequestMapping("/member/joinForm")
 	public void joinForm(HttpServletRequest req) {
 		//joinForm.jsp를 불러와 화면에 보여준다.
@@ -53,6 +66,13 @@ public class MemberController {
 		session.setAttribute("idCheck", false);
 		}
 	
+	/**
+	 * 아이디 중복체크 기능
+	 * 회원가입 페이지에서 제공되며 관련된 정보들을 member/idCheck로부터 JSON으로 받아옴.
+	 * @param req 세션
+	 * @param id form에 입력한 id
+	 * @return Redirect할 Url 및 아이디 중복여부:boolean
+	 */
 	@RequestMapping(value = "/member/idCheck")
 	public ModelAndView idCheck(HttpServletRequest req, 
 		@RequestParam(value = "id") String id) {
@@ -72,19 +92,35 @@ public class MemberController {
 		mav.addObject("result", result);
 		return mav;
 	}
-	@RequestMapping("/member/join")
+	
+	/**
+	 * 회원가입 페이지에서 제공되는 회원가입 기능.
+	 * @param m 가입할 계정의 정보
+	 * @return Redirect할 Url
+	 */
+	@PostMapping("/member/join")
 	public String join(Member m) {
 		//joinForm에서 입력받은 값을 m에 담고 db에 저장한다.
 		service.addMember(m);
 		return "member/loginForm";
 	}
 	
+	/**
+	 * 로그인 페이지(/member/loginForm.jsp)로 이동
+	 */
 	@RequestMapping("/member/loginForm")
 	public void loginForm() {
 		//loginForm.jsp를 불러와 화면에 보여준다
 	}
 	
-	@RequestMapping("/member/login")
+	/**
+	 * 로그인 페이지에서 제공되는 로그인 기능
+	 * 로그인 성공시 메인 페이지로, 실패시 로그인 페이지로 이동.
+	 * @param m 입력한 아이디, password를 담은 Member 객체
+	 * @param req 세션
+	 * @return Redirect할 Url 
+	 */
+	@PostMapping("/member/login")
 	public String login(Member m, HttpServletRequest req) {
 		//loginForm에서 입력받은 값을 m에 담고 해당하는 아이디에 대한 db 값을 m2에 담는다 
 		Member m2 = service.getMember(m.getId());
@@ -101,7 +137,7 @@ public class MemberController {
 	}
 	
 	/**
-	 * findForm.jsp로 이동하기 위한 메소드
+	 * member/findForm.jsp로 이동하기 위한 메소드
 	 */
 	@RequestMapping("/member/findForm")
 	public void findForm() {
@@ -109,12 +145,13 @@ public class MemberController {
 	}
 	
 	/**
-	 * 
+	 * 아이디 비번 찾기
+	 * @author 김현진
 	 * @param email 회원정보를 찾기 위해 입력 받은 email
 	 * @param name 회원정보를 찾기 위해 입력 받은 name
 	 * @return 회원찾기 폼에서 입력받은 정보로 회원정보를 찾아 findResult.jsp로 전달
 	 */
-	@RequestMapping("/member/find")
+	@PostMapping("/member/find")
 	public ModelAndView find(@RequestParam("email")String email, @RequestParam("name")String name) {
 		// 폼에서 입력받은 email과 name을 통해 DB에서 Id와 Pwd를 불러와 객체에 해당 정보를 저장한다.
 		Member m = service.getIdPwd(email, name);
@@ -133,6 +170,11 @@ public class MemberController {
 		return mav;
 	}
 	
+	/**
+	 * 내정보수정 페이지로 이동
+	 * @param req 세션
+	 * @return 이동할 Url 및 세션 아이디로 받아온 id값.
+	 */
 	@RequestMapping(value="/member/editForm")
 	public ModelAndView editForm(HttpServletRequest req) {
 		HttpSession session = req.getSession();
@@ -145,28 +187,41 @@ public class MemberController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/member/edit")
-	public String edit(HttpServletRequest req, Member m) {
-		//로그인된 아이디 값을 session을 통해 받아온다.
-		HttpSession session = req.getSession();
+	/**
+	 * 내정보수정 페이지에서 제공하는 내정보수정 기능
+	 * @param m 수정할 계정 정보
+	 * @return 이동할 Url
+	 */
+	@PostMapping(value="/member/edit")
+	public String edit(Member m) {
 		service.editMember(m);
 		return "/mypage/mypage";
 	}
 	
+	/**
+	 * 메인 페이지에서 제공하는 로그아웃 기능
+	 * @param req 세션
+	 * @return 이동할 Url
+	 */
 	@RequestMapping(value = "/member/logout")
 	public String logout(HttpServletRequest req) {
 		//로그인된 아이디 값을 session을 통해 받아온다.
 		HttpSession session = req.getSession(false);
 		// 세션이 말소되기 전 id를 가져오고
-				String id = (String) session.getAttribute("id");
-				// 그 id를 이용해 로그를 찍습니다. , 뒤에는 로그 시간이 찍힙니다. 
-				log.info(id+",logout,");
+		String id = (String) session.getAttribute("id");
+		// 그 id를 이용해 로그를 찍습니다. , 뒤에는 로그 시간이 찍힙니다. 
+		log.info(id+",logout,");
 		session.removeAttribute("id");
-		//id에 대한 세션을 지운다.
+		//id에 대한 세션을 소멸시킨다.
 		session.invalidate();
 		return "member/loginForm";
 	}
 
+	/**
+	 * 마이페이지에서 제공하는 회원탈퇴 기능
+	 * @param req 세션
+	 * @return 이동할 Url
+	 */
 	@RequestMapping(value = "/member/out")
 	public String out(HttpServletRequest req) {
 		//로그인된 아이디 값을 session을 통해 받아온다.
@@ -180,6 +235,10 @@ public class MemberController {
 		return "member/loginForm";
 	}
 	
+	/**
+	 * 로고 이미지 받아오기
+	 * @return 이미지
+	 */
 	@RequestMapping("/logo")
 	   public ResponseEntity<byte[]> getImg() {
 	      String path = "C:\\shopimg\\logo\\logo.png";
@@ -189,11 +248,9 @@ public class MemberController {
 	      try {
 	    	  header.add("Content-Type", Files.probeContentType(f.toPath()));
 	    	  result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(f), header, HttpStatus.OK);
-
 	      } catch (IOException e) {
 	         e.printStackTrace();
 	      }
-
 	      return result;
 	   }
 }

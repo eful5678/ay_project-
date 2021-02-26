@@ -7,6 +7,7 @@ package com.example.demo.admin;
  * @version main 1
  */
 public class Admin {
+	
 	/**
 	 * 고유 ID값입니다. [PK]
 	 */

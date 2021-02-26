@@ -49,7 +49,7 @@ $(document).ready(function(){
 </header>
 <h3>ID/PWD 찾기</h3>
 <p>회원가입 시 입력한 E-mail주소와 이름을 입력해주세요.
-<form>
+<form method="post">
    <table border="1">
       <tr>
          <th>EMAIL</th>

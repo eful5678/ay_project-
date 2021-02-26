@@ -20,7 +20,7 @@
 </c:if>
 <c:if test="${not empty list }">
 <table border="1">
-<tr><th>num</th><th>m_idID</th><th>p_num</th><th>quantity</th><th>address</th><th>tel</th><th>o_date</th><th>cost</th><th>state</th><th>리뷰작성</th>
+<tr><th>num</th><th>m_id</th><th>p_num</th><th>quantity</th><th>address</th><th>tel</th><th>o_date</th><th>cost</th><th>state</th><th>리뷰작성</th>
 <c:forEach var="p" items="${list }">
 <tr>
 	<td>${ p.num }</td>
