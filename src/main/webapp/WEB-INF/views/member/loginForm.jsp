@@ -26,11 +26,12 @@ function go() {
 	var password = document.getElementById("password");
 	
 	if(id.value == ""){
-		alert("아이디 또는 비밀번호가0 액션빔")
+		alert("아이디를 작성해주세요! ")
 		return
 	}
 	if(password.value == ""){
-		alert("아이디 또는 비밀번호가 액션빔")
+		alert("비밀번호를 작성해주세요!")
+		return
 	}else{
 		f.submit()
 	}
@@ -125,11 +126,11 @@ $(document).ready(function(){
 			</tr>
 		</thead>
 		<tr>
-			<th>ID</th>
+			<th>아이디</th>
 			<td><input type="text" name="id" id="id"></td>
 		</tr>
 		<tr>
-			<th>PWD</th>
+			<th>비밀번호</th>
 			<td><input type="password" name="password" id="password">
 			<input type="button" value="show" id="showPassword"></td>
 		</tr>

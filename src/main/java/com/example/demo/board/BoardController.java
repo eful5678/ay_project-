@@ -13,7 +13,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.page.Criteria;
 import com.example.demo.page.PageDTO;
 
-
+/**
+ * 
+ * @author 문효정
+ *
+ */
 @Controller
 public class BoardController {
 
@@ -39,6 +43,7 @@ public class BoardController {
 		return mav;
 	}
 
+	
 	@RequestMapping("/board/detail")
 	public ModelAndView detail(int num) {
 		System.out.println("/board/detail()");

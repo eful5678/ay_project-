@@ -69,11 +69,9 @@ public class MyPageController {
 		// ModelAndView 생성
 		ModelAndView mav = new ModelAndView("mypage/shoppingcartForm");
 		
-		String id = "";
 		// 세션 받아오기.
 		HttpSession session = req.getSession(false);
-		
-		sessionCheck(mav, id, session);
+		String id = (String) session.getAttribute("id");;
 		
 		// 장바구니 리스트를 받아오고 이를 mav에 담아 리턴한다.
 		ArrayList<Shoppingcart> list = cartService.getShoppingcartById(id);
@@ -91,12 +89,9 @@ public class MyPageController {
 		// ModelAndView 생성
 		ModelAndView mav = new ModelAndView("mypage/myOrderForm");
 		
-		String id = "";
-		
 		// 세션 받아오기.
 		HttpSession session = req.getSession(false);
-		
-		sessionCheck(mav, id, session);
+		String id = (String) session.getAttribute("id");;
 		
 		// 주문내역 리스트를 받아오고 이를 mav에 담아 리턴한다.
 		ArrayList<Order> list = orderService.getMyOrderListById(id);
@@ -114,12 +109,9 @@ public class MyPageController {
 		// ModelAndView 생성
 		ModelAndView mav = new ModelAndView("mypage/myQuestionForm");
 		
-		String id = "";
-		
 		// 세션 받아오기.
 		HttpSession session = req.getSession(false);
-		
-		sessionCheck(mav, id, session);
+		String id = (String) session.getAttribute("id");;
 		
 		// 문의내역 리스트를 받아오고, foreach 문을 활용해 각 문의내역에 달린 댓글 또한 받아와 set함.  
 		ArrayList<Qna> list = qnaService.getMyQnaListByWriter(id);

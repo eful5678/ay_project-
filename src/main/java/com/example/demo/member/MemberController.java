@@ -76,7 +76,7 @@ public class MemberController {
 	public String join(Member m) {
 		//joinForm에서 입력받은 값을 m에 담고 db에 저장한다.
 		service.addMember(m);
-		return "member/loginForm";
+		return "redirect:member/loginForm";
 	}
 	
 	@RequestMapping("/member/loginForm")
