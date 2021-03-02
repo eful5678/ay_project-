@@ -50,6 +50,7 @@ public class ProductService {
 	public List getProductByName(String name) {
 		return mapper.selectByName(name);
 	}
+
 	
 	/**
 	 * 가격 범위로 상품 리스트 받아오기

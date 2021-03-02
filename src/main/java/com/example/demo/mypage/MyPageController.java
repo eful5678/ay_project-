@@ -69,6 +69,7 @@ public class MyPageController {
 		String id = (String) session.getAttribute("id");
 			
 				
+
 		
 		// 장바구니 리스트를 받아오고 이를 mav에 담아 리턴한다.
 		ArrayList<Shoppingcart> list = cartService.getShoppingcartById(id);
@@ -85,6 +86,7 @@ public class MyPageController {
 	public ModelAndView myOrderForm(HttpServletRequest req) {
 		// ModelAndView 생성
 		ModelAndView mav = new ModelAndView("mypage/myOrderForm");
+
 		
 		// 세션 받아오기.
 		HttpSession session = req.getSession(false);
@@ -109,6 +111,7 @@ public class MyPageController {
 		
 		// 세션 받아오기.
 		HttpSession session = req.getSession(false);
+		id= (String) session.getAttribute("id");
 		
 		String id = (String) session.getAttribute("id");
 	
@@ -122,6 +125,7 @@ public class MyPageController {
 		
 		// 문의내역 리스트를 mav에 담아 리턴한다.
 		mav.addObject("list", list);
+		System.out.println("list에 담긴것을 출력하자: " + list);
 		return mav;
 	}
 }
