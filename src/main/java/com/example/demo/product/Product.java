@@ -65,7 +65,6 @@ public class Product {
 	 */
 	private int event_num;// 이벤트번호
 
-
 	/**
 	 * 파일 1값입니다. [NOT IN DB]
 	 */

@@ -11,6 +11,7 @@
 function checkEmpty(){
    
 }   
+
 $(document).ready(function(){  
    $("#find").click(function(){
       var email = document.getElementById("email");

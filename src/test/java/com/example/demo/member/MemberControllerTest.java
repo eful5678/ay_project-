@@ -7,6 +7,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import java.sql.Date;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.AutoConfigureMybatis;
@@ -120,5 +122,34 @@ public class MemberControllerTest {
 		.andExpect(status().isOk())
 		.andExpect(view().name("member/main"))
 		.andDo(print());
+	}
+	
+	@Test
+	@DisplayName("회원가입 성공")
+	public void joinSucess() throws Exception {
+		Member m = new Member();
+		m.setId("testers");
+		m.setPassword("pwd1234");
+		m.setName("테스터");
+		m.setBirth(new Date(2000, 12, 1));
+		m.setPostalCode("13494");
+		m.setRoadAddress("경기 성남시 분당구 판교");
+		m.setAddress("경기 성남시 분당구 판교");
+		m.setTel("01012345678");
+		m.setEmail("aorca603@gmail.com");
+		System.out.println(m.toString());
+		mockMvc.perform(post("/member/join")
+				.param("id", m.getId())
+				.param("password", m.getPassword())
+				.param("name", m.getName())
+				.param("birth", m.getBirth().toString())
+				.param("postalCode", m.getPostalCode())
+				.param("roadAddress", m.getRoadAddress())
+				.param("address", m.getName())
+				.param("tel", m.getTel())
+				.param("email", m.getEmail())
+		).andExpect(status().isOk()).andExpect(view().name("member/loginForm"))
+		 .andDo(print());
+		
 	}
 }

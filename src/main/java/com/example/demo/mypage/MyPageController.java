@@ -35,12 +35,6 @@ public class MyPageController {
 	private OrderService orderService;
 	
 	@Autowired
-	private BoardService boardService;
-	
-	@Autowired
-	private RepService repService;
-	
-	@Autowired
 	private QnaService qnaService;
 	
 	/**
@@ -69,11 +63,12 @@ public class MyPageController {
 		// ModelAndView 생성
 		ModelAndView mav = new ModelAndView("mypage/shoppingcartForm");
 		
-		String id = "";
 		// 세션 받아오기.
 		HttpSession session = req.getSession(false);
-		
-		sessionCheck(mav, id, session);
+				
+		String id = (String) session.getAttribute("id");
+			
+				
 		
 		// 장바구니 리스트를 받아오고 이를 mav에 담아 리턴한다.
 		ArrayList<Shoppingcart> list = cartService.getShoppingcartById(id);
@@ -91,13 +86,11 @@ public class MyPageController {
 		// ModelAndView 생성
 		ModelAndView mav = new ModelAndView("mypage/myOrderForm");
 		
-		String id = "";
-		
 		// 세션 받아오기.
 		HttpSession session = req.getSession(false);
-		
-		sessionCheck(mav, id, session);
-		
+				
+		String id = (String) session.getAttribute("id");
+			
 		// 주문내역 리스트를 받아오고 이를 mav에 담아 리턴한다.
 		ArrayList<Order> list = orderService.getMyOrderListById(id);
 		mav.addObject("list", list);
@@ -114,12 +107,11 @@ public class MyPageController {
 		// ModelAndView 생성
 		ModelAndView mav = new ModelAndView("mypage/myQuestionForm");
 		
-		String id = "";
-		
 		// 세션 받아오기.
 		HttpSession session = req.getSession(false);
 		
-		sessionCheck(mav, id, session);
+		String id = (String) session.getAttribute("id");
+	
 		
 		// 문의내역 리스트를 받아오고, foreach 문을 활용해 각 문의내역에 달린 댓글 또한 받아와 set함.  
 		ArrayList<Qna> list = qnaService.getMyQnaListByWriter(id);
@@ -131,23 +123,5 @@ public class MyPageController {
 		// 문의내역 리스트를 mav에 담아 리턴한다.
 		mav.addObject("list", list);
 		return mav;
-	}
-	
-	/**
-	 * 세션 여부 확인, 세션이 없으면 ModelAndView가 로그인 페이지로 가게 함.
-	 * @param mav 해당 ModelAndView가 Redirect할 Url
-	 * @param id 해당 메소드의 id에 세션 id를 할당.
-	 * @param session 세션
-	 */
-	private void sessionCheck(ModelAndView mav, String id, HttpSession session) {
-		if (session == null) {
-			System.out.println("session null");
-			mav.setViewName("member/login");
-		} else {
-			id = (String) session.getAttribute("id");
-		}
-		if (id.isBlank()) {
-			mav.setViewName("member/login");
-		}
 	}
 }

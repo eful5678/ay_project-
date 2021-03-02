@@ -78,84 +78,84 @@ $(document).ready(function(){
 	});
 		$("#join").click(function() {			
 			if ($("#id").val()=="" ){
-				alert("아이디가 액션빔");	
+				alert("아이디가 공백입니다.");	
 				return
 			} 
 			if (idJ.test($("#id").val())){
 				//정규 표현식과 일치하면 다음으로 넘김
 			} 
 			else {
-				alert("아이디 췍 띄우셈");
+				alert("아이디 형식이 부적절합니다.");
 				return
 			} 
 			if ($("#password1").val()==""){
-				alert("비밀번호가 액션빔");
+				alert("비밀번호가 공백입니다.");
 				return
 			} 
 			if (pwdJ.test($("#password1").val())){
 				//정규 표현식과 일치하면 다음으로 넘김
 			} 
 			else {
-				alert("비밀번호 췍 띄우셈");
+				alert("비밀번호 형식이 부적절합니다.");
 				return
 			} 
 			if ($("#password1").val() == $("#password2").val()){
 				//비밀번호 비교하고 일치하면 넘김
 			} 
 			else {
-				alert("비밀번호가 달라염");
+				alert("비밀번호가 일치하지 않습니다.");
 				return
 			}
 			if ($("#name").val()==""){
-				alert("이름이 액션빔");
+				alert("이름이 공백입니다.");
 				return
 			}
 			if (nameJ.test($("#name").val())){
 				//정규 표현식과 일치하면 다음으로 넘김
 			} 
 			else {
-				alert("이름 췍 띄우셈");
+				alert("이름 형식이 부적절합니다.");
 				return
 			} 
 			if ($("#birth").val()==""){
-				alert("생일이 액션빔");
+				alert("생일이 공백입니다.");
 				return
 			}
 			if ($("#gender").val()==""){
-				alert("성별이 액션빔");
+				alert("성별이 공백입니다.");
 				return
 			}
 			if ($("#address").val()==""){
-				alert("주소가 액션빔");
+				alert("주소가 공백입니다.");
 				return
 			}
 			if ($("#tel").val()==""){
-				alert("전화번호가 액션빔");
+				alert("전화번호가 공백입니다.");
 				return
 			}
 			if (telJ.test($("#tel").val())){
 				//정규 표현식과 일치하면 다음으로 넘김
 			} 
 			else {
-				alert("전화번호 췍 띄우셈");
+				alert("전화번호 형식이 부적절합니다.");
 				return
 			} 
 			if ($("#email").val()==""){
-				alert("이메일이 액션빔");
+				alert("이메일이 공백입니다.");
 				return
 			}
 			if (emailJ.test($("#email").val())){
 				//정규 표현식과 일치하면 다음으로 넘김
 			} 
 			else {
-				alert("이메일 췍 띄우셈");
+				alert("이메일 형식이 부적절합니다.");
 				return
 			} 
 			if ($("#idResult").text().trim() == "사용가능") {
 				$("form").submit();
 			}
 			else {
-				alert("id 중복체크 하세여");
+				alert("id 중복체크 하세요.");
 			}
 		});
 		$(document).ready(function() {
@@ -184,22 +184,6 @@ $(document).ready(function(){
     }
   });
 });
-</script>
-<script>
-$(document).ready(function(){
-	  $('#showPassword1').on('click', function(){
-	    var passwordField = $('#password2');
-	    var passwordFieldType = passwordField.attr('type');
-	    if(passwordFieldType == 'password')
-	    {
-	    	passwordField.attr('type', 'text');
-	    	$(this).val('Hide');
-	    } else {
-	    	passwordField.attr('type', 'password');
-	    	$(this).val('Show');
-	    }
-	  });
-	});
 </script>
  <!-- Required meta tags -->
  <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -372,7 +356,7 @@ $(document).ready(function(){
 				<span class="check_font" id="email_check"></span></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center"><input type="button" value="어서오고" id="join"></td>
+				<td colspan="2" align="center"><input type="button" value="회원가입" id="join"></td>
 			</tr>
 
 

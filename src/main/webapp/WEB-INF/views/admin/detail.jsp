@@ -140,13 +140,13 @@
 	<td><input type="text" name="quantity" value="${p.quantity }"></td>
 </tr>
 <tr>
-	<th>이벤트</th><td><select id="s1" name="s1"></select><input type="text" id="event_num" name="event_num" value="0"></td>
+	<th>이벤트</th><td><select id="s1" name="s1"></select><input type="text" id="event_num" name="event_num" value="${p.event_num}"></td>
 </tr>
 <tr>
-	<th>카테고리1</th><td><select id="s2" name="s2"></select><input type="text" id="category1" name="category1" value="0"></td>
+	<th>카테고리1</th><td><select id="s2" name="s2"></select><input type="text" id="category1" name="category1" value="${p.category1}"></td>
 </tr>
 <tr>
-	<th>카테고리2</th><td><select id="s3" name="s3"></select><input type="text" id="category2" name="category2" value="0"></td>
+	<th>카테고리2</th><td><select id="s3" name="s3"></select><input type="text" id="category2" name="category2" value="${p.category2}"></td>
 </tr>
 <tr>
 	<td colspan="2">
