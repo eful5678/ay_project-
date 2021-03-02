@@ -19,7 +19,9 @@
 <body>
 <!-- navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light mr-3">
-    <a class="navbar-brand" href="${ pageContext.request.contextPath }/member/main">프로젝트명</a>
+    <a class="navbar-brand" href="${ pageContext.request.contextPath }/member/main">
+    	<img src="${ pageContext.request.contextPath }/logo" alt="logo" width="249" height="60" class="d-inline-block align-top">
+    	</a>
     <button class="navbar-toggler" 
 		    type="button" 
 		    data-bs-toggle="collapse" 

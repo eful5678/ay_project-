@@ -8,6 +8,15 @@
 <script
 	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<!-- Required meta tags -->
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
+ <!-- Bootstrap CSS -->
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+ <!-- Option 1: Bootstrap Bundle with Popper -->
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
 <script>
 	//아이디 정규식
 	let idJ = /^[a-z0-9]{4,12}$/;
@@ -151,30 +160,87 @@ $("#edit").click(function() {
 		});
 	});
 </script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+<script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<script type="text/javascript" src="jquery.ui.datepicker-ko.js"></script>
+<script>
+$(function(){
+	 $("#birth").datepicker({
+	 }); 
+	});
+</script>
+<style type="text/css">
+.table th {
+    text-align: center;
+}
+
+.table {
+    border-radius: 5px;
+    width: 50%;
+    margin: 0px auto;
+    float: none;
+}
+
+.vertical-center {
+  min-height: 100%;
+  min-height: 100vh; 
+  display: flex;
+  align-items: center;
+}
+
+.table-bordered {
+	border: 1px;
+}
+.table td{
+width:30%
+}
+</style>
+<style>
+#edit{
+background-color : red;
+color : white;
+
+}
+#reset{
+background-color : blue;
+color : white;
+}
+</style>
 </head>
 <body>
-	<form action="${pageContext.request.contextPath }/member/edit">
-		<table border="1">
+<header>
+ <script type="text/javascript" src="/js/header.js"></script>
+</header>
+<div class="container-fluid vertical-center justify-content-center">
+	<form method="POST" action="${pageContext.request.contextPath }/member/edit">
+		<table class="table table-bordered">
+			<thead class="table-dark">
+			<tr>
+			      <th colspan="2">회원정보수정</th>
+			</tr>
+			</thead>
 			<tr>
 				<td>아이디</td>
 				<td><input type="text" name="id" value="${m.id }" readonly></td>
 			</tr>
 			<tr>
 				<td>비밀번호</td>
-				<td><input type="text" name="password" id="password1" placeholder="비밀번호" value="${m.password }">
-				<span class="check_font" id="pwd1_check"></span></td>
-				<td><input type="button" value="show" id="showPassword"></td>
+				<td><input type="text" name="password" id="password1"  placeholder="비밀번호">
+				<input type="button" value="show" id="showPassword">
+				<span class="check_font" id="pwd1_check"></span>
+				<div>*4~16자의 영문 소문자, 숫자만 사용가능</div></td>
 			</tr>
 			<tr>
-				<th>비밀번호 확인</th>
+				<td>비밀번호 확인</td>
 				<td><input type="password" id="password2" placeholder="비밀번호 확인">
+				<input type="button" value="show" id="showPassword1">
 					<span class="check_font" id="pwd2_check"></span></td>
-				<td><input type="button" value="show" id="showPassword1"></td>
 			</tr>
 			<tr>
 				<td>이름</td>
-				<td><input type="text" name="name" id="name" value="${m.name }">
-					<span class="check_font" id="name_check"></span></td>
+				<td colspan="2"><input type="text" name="name" id="name" value="${m.name }">
+					<span class="check_font" id="name_check"></span>
+				<div>*2~6자의 한글만 사용가능</div></td>
 			</tr>
 			<tr>
 				<td>생일</td>
@@ -182,8 +248,9 @@ $("#edit").click(function() {
 			</tr>
 			<tr>
 				<td>성별</td>
-				<td colspan="2"><input type="radio" name="gender" value="m">남자
-					<input type="radio" name="gender" value="f">여자</td>
+				<td colspan="2">
+				<input type="radio" name="gender" id="gender" value="${m.gender }">남자
+				<input type="radio" name="gender" id="gender">여자</td>
 			</tr>
 			<tr>
 				<td>주소</td>
@@ -251,10 +318,11 @@ $("#edit").click(function() {
 				<span class="check_font" id="email_check"></span></td>
 			</tr>
 			<tr>
-				<td colspan=""><input type="button" id="edit" value="수정">
-				<input type="reset" value="재입력"></td>
+				<td colspan="2"><input type="button" id="edit" value="수정" style="float : center;">
+				<input type="reset" value="재입력" id="reset"></td>
 			</tr>
 		</table>
 	</form>
+	</div>
 </body>
 </html>

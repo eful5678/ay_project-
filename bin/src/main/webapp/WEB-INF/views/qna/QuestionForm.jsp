@@ -59,7 +59,7 @@ var ext = fileName.split('.').pop().toLowerCase();
 								htmls+="<hr>"
 						});
 						}
-						$("#replyList").html(htmls);
+						$("#replyList").text(htmls);
 				     }
 		});
 

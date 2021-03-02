@@ -48,15 +48,15 @@ $(document).ready(function(){
 <a href="${pageContext.request.contextPath }/member/loginForm">Login</a>
 </header>
 <h3>ID/PWD 찾기</h3>
-<p>회원가입 시 입력한 E-mail주소와 이름을 입력해주세요.
+<p>회원가입 시 입력한 E-mail주소와 이름을 입력해주세요.</p>
 <form>
    <table border="1">
       <tr>
-         <th>EMAIL</th>
+         <th>이메일</th>
          <td><input type="text" name="email" id="email"></td>
       </tr>
       <tr>
-         <th>NAME</th>
+         <th>이름</th>
          <td><input type="text" name="name"id="name"></td>
       </tr>
       <tr>

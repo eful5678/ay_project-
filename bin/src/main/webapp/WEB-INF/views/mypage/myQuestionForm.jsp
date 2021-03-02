@@ -22,7 +22,7 @@
 	<td>${ p.pwd }</td>
 	<td>${ p.writer }</td>
 	<td><a href="${ pageContext.request.contextPath }/qna/detail?num=${ p.num }">${ p.title }</a></td>
-	<td>${ p.content }</td>
+	<td><c:out value="${ p.content }"></c:out></td>
 	<td>${ p.state }</td>
 	<td>${ p.regdate }</td>
 </tr>

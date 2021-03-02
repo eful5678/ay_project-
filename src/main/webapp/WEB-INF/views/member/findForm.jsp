@@ -41,16 +41,29 @@ $(document).ready(function(){
 })
    
 </script>
+
 </head>
 <body>
 <header>
-<a href="${pageContext.request.contextPath }/member/main">Main</a>
-<a href="${pageContext.request.contextPath }/member/loginForm">Login</a>
+<script src="/js/header.js"></script>
+ <!-- Required meta tags -->
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
+ <!-- Bootstrap CSS -->
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+ <!-- Option 1: Bootstrap Bundle with Popper -->
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 </header>
-<h3>ID/PWD 찾기</h3>
-<p>회원가입 시 입력한 E-mail주소와 이름을 입력해주세요.</p>
+<p align="center">회원가입 시 입력한 E-mail주소와 이름을 입력해주세요.</p>
+<div class="container-fluid vertical-center d-flex justify-content-center">
 <form>
-   <table border="1">
+   <table class="table table-hover text-centered table-bordered" border="1">
+		<thead class="table-dark">
+		<tr>
+		<th colspan="2">ID/PWD 찾기</th>
+		</tr>
+		</thead>
       <tr>
          <th>이메일</th>
          <td><input type="text" name="email" id="email"></td>
@@ -60,10 +73,11 @@ $(document).ready(function(){
          <td><input type="text" name="name"id="name"></td>
       </tr>
       <tr>
-         <td colspan="2"><input type="button" id="find" value="find" onclick="checkEmpty()"></td>
+         <td colspan="2"><input type="button" id="find" value="찾기" onclick="checkEmpty()"></td>
       </tr>
    </table>
 </form>
 <div id="findId"></div>
+</div>
 </body>
 </html>

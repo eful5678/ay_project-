@@ -23,7 +23,10 @@ let emailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[
 let telJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
 $(document).ready(function(){
 	$("#id").keyup(function(){
-		if(idJ.test($(this).val())){
+		if($(this).val() == "admin"){
+			$("#id_check").text('불가능');
+			$('#id_check').css('color', 'red');
+		}else if(idJ.test($(this).val())){
 			$("#id_check").text('가능');
 			$('#id_check').css('color', 'green');
 		}else{
@@ -79,6 +82,10 @@ $(document).ready(function(){
 		$("#join").click(function() {			
 			if ($("#id").val()=="" ){
 				alert("아이디를 작성해주세요!");	
+				return
+			} 
+			if ($("#id").val()=="admin" ){
+				alert("사용이 불가능한 아이디입니다!");	
 				return
 			} 
 			if (idJ.test($("#id").val())){
@@ -201,6 +208,13 @@ $(document).ready(function(){
 	  });
 	});
 </script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+<script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<script>
+$(function(){
+	 $("#datepicker").datepicker();
+	});
+</script>
  <!-- Required meta tags -->
  <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -234,26 +248,23 @@ $(document).ready(function(){
 width:40%
 }
 </style> 
+<style>
+#join {
+background-color: blue;
+color : white;
+}
+#reset{
+background-color:red;
+color : white;
+}
 
+</style>
  <script type="text/javascript"> 
  function goPage() { location.href="${pageContext.request.contextPath}/member/joinForm"; } 
  </script>
 </head>
 <body>
 	<header>
-<!-- navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light ms-3">
-    <a class="navbar-brand" href="${ pageContext.request.contextPath }/member/main">프로젝트명</a>
-    <button class="navbar-toggler" 
-		    type="button" 
-		    data-bs-toggle="collapse" 
-		    data-bs-target="#navbarSupportedContent" 
-		    aria-controls="navbarSupportedContent" 
-		    aria-expanded="false" 
-		    aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto">
         <c:if test="${ empty sessionScope.id }">
@@ -290,7 +301,7 @@ width:40%
 			<tr>
 				<th>아이디</th>
 				<td colspan="2">
-					<input type="text" name="id" id="id" placeholder="4~16자의 영문 소문자, 숫자만 사용가능합니다">
+					<input type="text" name="id" id="id" placeholder="4~16자의 영문 소문자, 숫자만 사용가능" style="width:350px;height:30px;font-size:16px;" >
 					<span class="check_font" id="id_check"></span>
 					<input type="button" value="id중복확인" id="idCheck"> 
 					<span id="idResult"></span>
@@ -299,24 +310,24 @@ width:40%
 			</tr>
 			<tr>
 				<th>비밀번호</th>
-				<td><input type="password" name="password" id="password1" placeholder="비밀번호를 쓰세여">
+				<td><input type="password" name="password" id="password1" placeholder="4~16자의 영문 대소문자, 숫자만 사용가능" style="width:350px;height:30px;font-size:16px;">
 				<input type="button" value="show" id="showPassword">
 				<span class="check_font" id="pwd1_check"></span></td>
 			</tr>
 			<tr>
 				<th>비밀번호확인</th>
-				<td><input type="password"  id="password2" placeholder="비밀번호를 쓰세여">
+				<td><input type="password"  id="password2" placeholder="비밀번호확인">
 				<input type="button" value="show" id="showPassword1">
 				<span class="check_font" id="pwd2_check"></span></td>
 			</tr>
 			<tr>
 				<th>이름</th>
-				<td><input type="text" name="name" id="name">
+				<td><input type="text" name="name" id="name"placeholder="2~6자의 한글만 사용가능" style="width:350px;height:30px;font-size:16px;">
 				<span class="check_font" id="name_check"></span></td>
 			</tr>
 			<tr>
 				<th>생일</th>
-				<td><input type="date" name="birth" id="birth">
+				<td><input type="text" name="birth" id="datepicker">
 			</tr>
 			<tr>
 				<th>성별</th>
@@ -366,18 +377,18 @@ width:40%
 			</tr>
 			<tr>
 				<th>전화번호</th>
-				<td><input type="text" name="tel" id="tel">
+				<td><input type="text" name="tel" id="tel"placeholder="전화번호를 작성해주세요." style="width:350px;height:30px;font-size:16px;">
 				<span class="check_font" id="tel_check"></span></td>
 			</tr>
 			<tr>
 				<th>이메일</th>
-				<td><input type="text" name="email" id="email">
+				<td><input type="text" name="email" id="email"placeholder="이메일을 작성해주세요." style="width:350px;height:30px;font-size:16px;">
 				<span class="check_font" id="email_check"></span></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
 				<input type="button" value="회원가입" id="join">
-				<input type="reset" value="재입력">
+				<input type="reset" value="재입력" id="reset">
 				</td>
 				
 			</tr>
