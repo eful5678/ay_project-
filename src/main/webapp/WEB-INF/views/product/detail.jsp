@@ -116,6 +116,7 @@
 
 <tr>
 <td colspan="2">
+	<input type="hiddeb" name="price" id="cost"  value="${p.price }" readonly>
 	<input type="hidden" name="m_id" id="m_id" value="${ sessionScope.id }">
 	<input type="submit" value="구매" >
 	<input type="button" value="장바구니로" id="cart">
