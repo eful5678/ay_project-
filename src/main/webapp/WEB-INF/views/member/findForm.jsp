@@ -11,13 +11,14 @@
 function checkEmpty(){
    
 }   
-$(document).ready(function(){  
+$(document).ready(function(){
+	$("#btn").hide();
    $("#find").click(function(){
       var email = document.getElementById("email");
       var name = document.getElementById("name");
       
       if(email.value == ""){
-         alert("email주소를 입력해주세요.");
+    	  alert("email주소를 입력해주세요.");
          return;
       }
       
@@ -32,16 +33,17 @@ $(document).ready(function(){
                 alert(data);
                 if(data == "등록되지 않은 이메일주소 또는 이름입니다."){
                    alert("등록되지 않은 이메일주소 또는 이름입니다.");
-                }
+                }else{
                 $("#findId").text(data);
-                
+                $("#btn").show();
+                }
              })
+                
        }
    })
 })
    
 </script>
-
 </head>
 <body>
 <header>
@@ -73,8 +75,11 @@ $(document).ready(function(){
          <td><input type="text" name="name"id="name"></td>
       </tr>
       <tr>
-         <td colspan="2"><input type="button" id="find" value="찾기" onclick="checkEmpty()"></td>
+         <td colspan="2"><input type="button" id="find" value="찾기" onclick="checkEmpty()">
+         <input type="button" id="btn" value="로그인" onclick="location.href='/member/loginForm'">
+      </td>
       </tr>
+      
    </table>
 </form>
 <div id="findId"></div>

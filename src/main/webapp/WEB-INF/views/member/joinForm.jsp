@@ -23,6 +23,14 @@ let emailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[
 let telJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
 $(document).ready(function(){
 	$("#id").keyup(function(){
+		 
+		 var str = document.getElementById("datepicker").value;
+		 var strArr = str.split("/");
+		 var date = new Date(strArr[0], strArr[1]-1, strArr[2]);
+		 console.log(date);
+		 console.log(typeof(date));
+		 console.log(str);
+	
 		if($(this).val() == "admin"){
 			$("#id_check").text('불가능');
 			$('#id_check').css('color', 'red');
@@ -212,7 +220,8 @@ $(document).ready(function(){
 <script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 <script>
 $(function(){
-	 $("#datepicker").datepicker();
+	 $("#datepicker").datepicker({dateFormat: "yy-mm-dd"});
+
 	});
 </script>
  <!-- Required meta tags -->
@@ -327,7 +336,7 @@ color : white;
 			</tr>
 			<tr>
 				<th>생일</th>
-				<td><input type="text" name="birth" id="datepicker">
+				<td><input type="text" name="birth" id="datepicker"></td>
 			</tr>
 			<tr>
 				<th>성별</th>

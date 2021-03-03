@@ -75,6 +75,7 @@ public class MemberController {
 	}
 	@PostMapping("/member/join")
 	public String join(Member m) {
+		//joinForm에 작성한 값이 없거나 "admin"일때 joinForm으로 되돌린다 
 		if(m == null || m.getId().equals("admin")) {
 			return "/member/joinForm";
 		} else {
